@@ -25,7 +25,7 @@
 <img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/黑色色块用图片代替2.jpg" width="35%" height="35%">
 
 黑色色块用图片代替且带logo<br>
-<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/黑色色块用图片代替且带logo.jpg" width="35%" height="35%">
+<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/黑色色块用图片代替还带logo.jpg" width="35%" height="35%">
 
 
 ***
