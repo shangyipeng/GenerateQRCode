@@ -24,6 +24,10 @@
 <img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/黑色色块用图片代替1.jpg" width="35%" height="35%">
 <img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/黑色色块用图片代替2.jpg" width="35%" height="35%">
 
+黑色色块用图片代替且带logo<br>
+<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/黑色色块用图片代替且带logo.jpg" width="35%" height="35%">
+
+
 ***
 更多技术干货，欢迎关注我的公众号：ChaoYoung
 <br><img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/qrcode_chaoyoung.jpg" width="20%" height="20%">
