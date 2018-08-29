@@ -8,9 +8,9 @@
 <img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/一般二维码.jpg" width="35%" height="35%">
   <br><br>
 彩色二维码<br>
-<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/绿色二维码.jpg" width="35%" height="35%">
-<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/蓝色二维码.jpg" width="35%" height="35%">
-<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/黄色二维码.jpg" width="35%" height="35%">
+<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/绿色二维码.jpg" width="32%" height="35%">
+<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/蓝色二维码.jpg" width="32%" height="35%">
+<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/黄色二维码.jpg" width="32%" height="35%">
 </div>
 
 带logo二维码<br>
