@@ -22,9 +22,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -36,10 +38,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText et_content;
     private ImageView iv_qrcode;
     private ImageView picture_logo, picture_black;//logo，代替黑色色块的图片
+
+    private EditText et_width, et_height;
+    private Spinner sp_error_correction_level, sp_margin, sp_color_black, sp_color_white;
     private String content;//二维码内容
-    private int width,height;//宽度，高度
-    private String margin;//空白边距
-    private int color_black,color_white;//黑色色块，白色色块
+    private int width, height;//宽度，高度
+    private String error_correction_level, margin;//容错率，空白边距
+    private int color_black, color_white;//黑色色块，白色色块
 
     public static final int TAKE_PHOTO = 1;//拍照
     public static final int CHOOSE_PHOTO = 2;//从相册选择图片
@@ -57,23 +62,120 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         iv_qrcode = findViewById(R.id.iv_qrcode);
         picture_logo = findViewById(R.id.picture_logo);
         picture_black = findViewById(R.id.picture_black);
+        et_width = findViewById(R.id.et_width);
+        et_height = findViewById(R.id.et_height);
+        sp_error_correction_level = findViewById(R.id.sp_error_correction_level);
+        sp_margin = findViewById(R.id.sp_margin);
+        sp_color_black = findViewById(R.id.sp_color_black);
+        sp_color_white = findViewById(R.id.sp_color_white);
         btn_generate.setOnClickListener(this);
         picture_logo.setOnClickListener(this);
         picture_black.setOnClickListener(this);
+        iv_qrcode.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(MainActivity.this, "长按保存二维码，敬请期待！", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+
+        sp_error_correction_level.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                error_correction_level = getResources().getStringArray(R.array.spinarr_error_correction)[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        sp_margin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                margin = getResources().getStringArray(R.array.spinarr_margin)[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        sp_color_black.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String str_color_black = getResources().getStringArray(R.array.spinarr_color_black)[position];
+                if (str_color_black.equals("黑色")) {
+                    color_black = Color.BLACK;
+                } else if (str_color_black.equals("白色")) {
+                    color_black = Color.WHITE;
+                } else if (str_color_black.equals("蓝色")) {
+                    color_black = Color.BLUE;
+                } else if (str_color_black.equals("绿色")) {
+                    color_black = Color.GREEN;
+                } else if (str_color_black.equals("黄色")) {
+                    color_black = Color.YELLOW;
+                } else if (str_color_black.equals("红色")) {
+                    color_black = Color.RED;
+                } else if (str_color_black.equals("紫色")) {
+                    color_black = Color.parseColor("#9370DB");
+                } else if (str_color_black.equals("粉红色")) {
+                    color_black = Color.parseColor("#ffc0cb");
+                } else if (str_color_black.equals("薄荷色")) {
+                    color_black = Color.parseColor("#BDFCC9");
+                } else {
+                    color_black = Color.BLACK;
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        sp_color_white.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String str_color_white = getResources().getStringArray(R.array.spinarr_color_white)[position];
+                if (str_color_white.equals("黑色")) {
+                    color_white = Color.BLACK;
+                } else if (str_color_white.equals("白色")) {
+                    color_white = Color.WHITE;
+                } else if (str_color_white.equals("蓝色")) {
+                    color_white = Color.BLUE;
+                } else if (str_color_white.equals("绿色")) {
+                    color_white = Color.GREEN;
+                } else if (str_color_white.equals("黄色")) {
+                    color_white = Color.YELLOW;
+                } else if (str_color_white.equals("红色")) {
+                    color_white = Color.RED;
+                } else if (str_color_white.equals("紫色")) {
+                    color_white = Color.parseColor("#9370DB");
+                } else if (str_color_white.equals("粉红色")) {
+                    color_white = Color.parseColor("#ffc0cb");
+                } else if (str_color_white.equals("薄荷色")) {
+                    color_white = Color.parseColor("#BDFCC9");
+                } else {
+                    color_white = Color.WHITE;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_generate:
-                content = et_content.getText().toString();
-                if(content.length()<=0){
-                    Toast.makeText(this, "你没有输入二维码内容哟！", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Bitmap mBitmap = QRCodeUtil.createQRCodeBitmap(content, 800, 800, "UTF-8",
-                        "H", "1", Color.BLACK, Color.WHITE, logoBitmap, 0.2F, blackBitmap);
-                iv_qrcode.setImageBitmap(mBitmap);
+                generateQrcodeAndDisplay();
+
+//                Bitmap mBitmap = QRCodeUtil.createQRCodeBitmap(content, 800, 800, "UTF-8",
+//                        "H", "1", Color.BLACK, Color.WHITE, logoBitmap, 0.2F, blackBitmap);
                 break;
             case R.id.picture_logo:
                 remark = 0;
@@ -86,6 +188,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 break;
         }
+    }
+
+    /**
+     * 生成二维码并显示
+     */
+    private void generateQrcodeAndDisplay() {
+        content = et_content.getText().toString();
+        String str_width = et_width.getText().toString();
+        String str_height = et_height.getText().toString();
+        if (str_width.length() <= 0 || str_height.length() <= 0) {
+            width = 650;
+            height = 650;
+        } else {
+            width = Integer.parseInt(str_width);
+            height = Integer.parseInt(str_height);
+        }
+
+        if (content.length() <= 0) {
+            Toast.makeText(this, "你没有输入二维码内容哟！", Toast.LENGTH_SHORT).show();
+            return;
+        }
+//        Toast.makeText(this, width + "," + height + margin + error_correction_level, Toast.LENGTH_SHORT).show();
+        Bitmap mBitmap = QRCodeUtil.createQRCodeBitmap(content, width, height, "UTF-8",
+                error_correction_level, margin, color_black, color_white, logoBitmap, 0.2F, blackBitmap);
+        iv_qrcode.setImageBitmap(mBitmap);
     }
 
     /**
