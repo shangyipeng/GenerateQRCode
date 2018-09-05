@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btn_generate;
     private EditText et_content;
     private ImageView iv_qrcode;
-    private Button btn_chooseLogo, btn_chooseblack;//选取logo，选取代替黑色色块的图片
+//    private Button btn_chooseLogo, btn_chooseblack;//选取logo，选取代替黑色色块的图片
     private ImageView picture_logo, picture_black;
     private String content;//二维码内容
     public static final int TAKE_PHOTO = 1;//拍照
@@ -52,13 +52,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         et_content = findViewById(R.id.et_content);
         btn_generate = findViewById(R.id.btn_generate);
         iv_qrcode = findViewById(R.id.iv_qrcode);
-        btn_chooseLogo = findViewById(R.id.btn_chooseLogo);
-        btn_chooseblack = findViewById(R.id.btn_chooseblack);
+//        btn_chooseLogo = findViewById(R.id.btn_chooseLogo);
+//        btn_chooseblack = findViewById(R.id.btn_chooseblack);
         picture_logo = findViewById(R.id.picture_logo);
         picture_black = findViewById(R.id.picture_black);
         btn_generate.setOnClickListener(this);
-        btn_chooseLogo.setOnClickListener(this);
-        btn_chooseblack.setOnClickListener(this);
+        picture_logo.setOnClickListener(this);
+        picture_black.setOnClickListener(this);
     }
 
     @Override
@@ -70,11 +70,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         "H", "1", Color.BLACK, Color.WHITE, logoBitmap, 0.2F, blackBitmap);
                 iv_qrcode.setImageBitmap(mBitmap);
                 break;
-            case R.id.btn_chooseLogo:
+            case R.id.picture_logo:
                 remark = 0;
                 ShowChooseDialog();
                 break;
-            case R.id.btn_chooseblack:
+            case R.id.picture_black:
                 remark = 1;
                 ShowChooseDialog();
                 break;
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (Build.VERSION.SDK_INT < 24) {
             imageUri = Uri.fromFile(outputImage);
         } else {
-            imageUri = FileProvider.getUriForFile(MainActivity.this, "com.example.cameraalbumtest.fileprovider", outputImage);
+            imageUri = FileProvider.getUriForFile(MainActivity.this, "com.example.xch.generateqrcode.fileprovider", outputImage);
         }
         // 启动相机程序
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
