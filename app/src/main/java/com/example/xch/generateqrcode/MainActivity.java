@@ -6,7 +6,6 @@ import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+
 import java.io.File;
 import java.io.IOException;
 
@@ -37,6 +37,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView iv_qrcode;
     private ImageView picture_logo, picture_black;//logo，代替黑色色块的图片
     private String content;//二维码内容
+    private int width,height;//宽度，高度
+    private String margin;//空白边距
+    private int color_black,color_white;//黑色色块，白色色块
+
     public static final int TAKE_PHOTO = 1;//拍照
     public static final int CHOOSE_PHOTO = 2;//从相册选择图片
     private Uri imageUri;

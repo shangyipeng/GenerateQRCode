@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="spingarr_error_correction">
+        <item>H：35%</item>
+        <item>Q：25%</item>
+        <item>M：15% </item>
+        <item>L：7% </item>
+    </string-array>
+
+    <string-array name="spingarr_margin">
+        <item>0.5</item>
+        <item>1</item>
+        <item>1.5</item>
+        <item>2</item>
+        <item>2.5</item>
+        <item>3</item>
+        <item>3.5</item>
+        <item>4</item>
+        <item>4.5</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="spingarr_color_black">
+        <item>黑色</item>
+        <item>白色</item>
+        <item>蓝色</item>
+        <item>绿色</item>
+        <item>黄色</item>
+        <item>红色</item>
+        <item>紫色</item>
+        <item>粉红色</item>
+        <item>橘黄色</item>
+    </string-array>
+
+    <string-array name="spingarr_color_white">
+        <item>白色</item>
+        <item>黑色</item>
+        <item>蓝色</item>
+        <item>绿色</item>
+        <item>黄色</item>
+        <item>红色</item>
+        <item>紫色</item>
+        <item>粉红色</item>
+        <item>橘黄色</item>
+    </string-array>
+</resources>
