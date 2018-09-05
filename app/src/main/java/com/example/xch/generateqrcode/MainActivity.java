@@ -35,8 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btn_generate;
     private EditText et_content;
     private ImageView iv_qrcode;
-//    private Button btn_chooseLogo, btn_chooseblack;//选取logo，选取代替黑色色块的图片
-    private ImageView picture_logo, picture_black;
+    private ImageView picture_logo, picture_black;//logo，代替黑色色块的图片
     private String content;//二维码内容
     public static final int TAKE_PHOTO = 1;//拍照
     public static final int CHOOSE_PHOTO = 2;//从相册选择图片
@@ -52,8 +51,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         et_content = findViewById(R.id.et_content);
         btn_generate = findViewById(R.id.btn_generate);
         iv_qrcode = findViewById(R.id.iv_qrcode);
-//        btn_chooseLogo = findViewById(R.id.btn_chooseLogo);
-//        btn_chooseblack = findViewById(R.id.btn_chooseblack);
         picture_logo = findViewById(R.id.picture_logo);
         picture_black = findViewById(R.id.picture_black);
         btn_generate.setOnClickListener(this);
@@ -66,6 +63,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btn_generate:
                 content = et_content.getText().toString();
+                if(content.length()<=0){
+                    Toast.makeText(this, "你没有输入二维码内容哟！", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Bitmap mBitmap = QRCodeUtil.createQRCodeBitmap(content, 800, 800, "UTF-8",
                         "H", "1", Color.BLACK, Color.WHITE, logoBitmap, 0.2F, blackBitmap);
                 iv_qrcode.setImageBitmap(mBitmap);

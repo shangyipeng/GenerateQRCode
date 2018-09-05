@@ -2,6 +2,7 @@ package com.example.xch.generateqrcode;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
@@ -58,7 +59,7 @@ public class QRCodeUtil {
             /** 2.将配置参数传入到QRCodeWriter的encode方法生成BitMatrix(位矩阵)对象 */
             BitMatrix bitMatrix = new QRCodeWriter().encode(content, BarcodeFormat.QR_CODE, width, height, hints);
 
-            /** three.创建像素数组,并根据BitMatrix(位矩阵)对象为数组元素赋颜色值 */
+            /** 3.创建像素数组,并根据BitMatrix(位矩阵)对象为数组元素赋颜色值 */
             if (bitmap_black != null) {
                 //从当前位图按一定的比例创建一个新的位图
                 bitmap_black = Bitmap.createScaledBitmap(bitmap_black, width, height, false);
@@ -79,7 +80,7 @@ public class QRCodeUtil {
                 }
             }
 
-            /** bitmap_black3.创建Bitmap对象,根据像素数组设置Bitmap每个像素点的颜色值,并返回Bitmap对象 */
+            /** 4.创建Bitmap对象,根据像素数组设置Bitmap每个像素点的颜色值,并返回Bitmap对象 */
             Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
             bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
 
@@ -126,7 +127,7 @@ public class QRCodeUtil {
         float scaleWidth = srcWidth * logoPercent / logoWidth;
         float scaleHeight = srcHeight * logoPercent / logoHeight;
 
-        /** three. 使用Canvas绘制,合成图片 */
+        /** 3. 使用Canvas绘制,合成图片 */
         Bitmap bitmap = Bitmap.createBitmap(srcWidth, srcHeight, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
         canvas.drawBitmap(srcBitmap, 0, 0, null);
@@ -135,4 +136,5 @@ public class QRCodeUtil {
 
         return bitmap;
     }
+
 }
