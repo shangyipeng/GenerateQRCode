@@ -27,6 +27,14 @@
 黑色色块用图片代替且带logo<br>
 <img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/黑色色块用图片代替还带logo.jpg" width="35%" height="35%">
 
+增加 拍照或从相册选取图片 功能，动态更换logo和黑色色块
+<br>
+<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/choose.jpg" width="35%" height="35%">
+<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/takephoto.jpg" width="35%" height="35%">
+<br>
+<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/album.jpg" width="35%" height="35%">
+<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/result.jpg" width="35%" height="35%">
+
 
 ***
 更多技术干货，欢迎关注我的公众号：ChaoYoung
