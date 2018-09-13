@@ -305,7 +305,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     openAlbum();
                 } else {
-                    Toast.makeText(this, "You denied the permission", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "你拒绝了权限申请，可能无法打开相册哟", Toast.LENGTH_SHORT).show();
                 }
                 break;
             default:
@@ -349,6 +349,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * 4.4以后
+     * @param data
+     */
     @SuppressLint("NewApi")
     private void handleImageOnKitKat(Intent data) {
         String imagePath = null;
@@ -375,6 +379,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         displayImage(imagePath); // 根据图片路径显示图片
     }
 
+    /**
+     * 4.4版本以前，直接获取真实路径
+     * @param data
+     */
     private void handleImageBeforeKitKat(Intent data) {
         Uri uri = data.getData();
         String imagePath = getImagePath(uri, null);
@@ -404,7 +412,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if (remark == 0) {//logo
                 logoBitmap = BitmapFactory.decodeFile(imagePath);
-                // 将拍摄的照片显示出来
+                // 显示图片
                 picture_logo.setImageBitmap(logoBitmap);
             } else if (remark == 1) {//black
                 blackBitmap = BitmapFactory.decodeFile(imagePath);
@@ -412,7 +420,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } else {
             }
         } else {
-            Toast.makeText(this, "failed to get image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "获取图片失败", Toast.LENGTH_SHORT).show();
         }
     }
 }
