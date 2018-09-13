@@ -30,7 +30,7 @@
 <br>
 
 ###动态更换logo和黑色色块
-增加拍照或从相册选取图片功能
+<br>增加拍照或从相册选取图片功能
 <br><br>
 <img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/choose.jpg" width="30%" height="35%">
 <img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/takephoto.jpg" width="30%" height="35%">
