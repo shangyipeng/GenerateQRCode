@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Bitmap blackBitmap;//代替黑色色块的图片
     private int remark;//标记返回的是logo还是代替黑色色块图片
 
+    private Bitmap qrcode_bitmap;//生成的二维码
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         iv_qrcode.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Toast.makeText(MainActivity.this, "长按保存二维码，敬请期待！", Toast.LENGTH_SHORT).show();
+                imgChooseDialog();
                 return true;
             }
         });
@@ -171,23 +173,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_generate:
+            case R.id.btn_generate://生成
                 generateQrcodeAndDisplay();
-
-//                Bitmap mBitmap = QRCodeUtil.createQRCodeBitmap(content, 800, 800, "UTF-8",
-//                        "H", "1", Color.BLACK, Color.WHITE, logoBitmap, 0.2F, blackBitmap);
                 break;
-            case R.id.picture_logo:
+            case R.id.picture_logo://选取logo
                 remark = 0;
-                ShowChooseDialog();
+                showChooseDialog();
                 break;
-            case R.id.picture_black:
+            case R.id.picture_black://选取代替黑色色块的图片
                 remark = 1;
-                ShowChooseDialog();
+                showChooseDialog();
                 break;
             default:
                 break;
         }
+    }
+
+    /**
+     * 保存图片至本地
+     * @param bitmap
+     */
+    private void saveImg(Bitmap bitmap){
+        String fileName = "qr_"+System.currentTimeMillis() + ".jpg";
+        boolean isSaveSuccess = ImageUtil.saveImageToGallery(MainActivity.this, bitmap,fileName);
+        if (isSaveSuccess) {
+            Toast.makeText(MainActivity.this, "图片已保存至本地", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(MainActivity.this, "保存图片失败，请稍后重试", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * 分享图片(直接将bitamp转换为Uri)
+     * @param bitmap
+     */
+    private void shareImg(Bitmap bitmap){
+        Uri uri = Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, null,null));
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.setType("image/*");//设置分享内容的类型
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent = Intent.createChooser(intent, "分享");
+        startActivity(intent);
     }
 
     /**
@@ -209,21 +236,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "你没有输入二维码内容哟！", Toast.LENGTH_SHORT).show();
             return;
         }
-//        Toast.makeText(this, width + "," + height + margin + error_correction_level, Toast.LENGTH_SHORT).show();
-        Bitmap mBitmap = QRCodeUtil.createQRCodeBitmap(content, width, height, "UTF-8",
+        qrcode_bitmap = QRCodeUtil.createQRCodeBitmap(content, width, height, "UTF-8",
                 error_correction_level, margin, color_black, color_white, logoBitmap, 0.2F, blackBitmap);
-        iv_qrcode.setImageBitmap(mBitmap);
+        iv_qrcode.setImageBitmap(qrcode_bitmap);
     }
 
     /**
-     * 弹出选择框
+     * 弹出选择框（拍照或从相册选取图片）
      *
      * @author xch
      */
-    public void ShowChooseDialog() {
-        AlertDialog.Builder Choicebuilder = new AlertDialog.Builder(this);
-        Choicebuilder.setCancelable(false);
-        Choicebuilder
+    private void showChooseDialog() {
+        AlertDialog.Builder choiceBuilder = new AlertDialog.Builder(this);
+        choiceBuilder.setCancelable(false);
+        choiceBuilder
                 .setTitle("选择图片")
                 .setSingleChoiceItems(new String[]{"拍照上传", "从相册选择"}, -1,
                         new DialogInterface.OnClickListener() {
@@ -248,10 +274,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
 
-        Choicebuilder.create();
-        Choicebuilder.show();
+        choiceBuilder.create();
+        choiceBuilder.show();
     }
 
+    /**
+     * 长按二维码图片弹出选择框（保存或分享）
+     */
+    private void imgChooseDialog(){
+        AlertDialog.Builder choiceBuilder = new AlertDialog.Builder(MainActivity.this);
+        choiceBuilder.setCancelable(false);
+        choiceBuilder
+                .setTitle("选择")
+                .setSingleChoiceItems(new String[]{"存储至手机", "分享"}, -1,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which) {
+                                    case 0://存储
+                                        saveImg(qrcode_bitmap);
+                                        break;
+                                    case 1:// 分享
+                                        shareImg(qrcode_bitmap);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                dialog.dismiss();
+                            }
+                        })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        choiceBuilder.create();
+        choiceBuilder.show();
+    }
 
     /**
      * 拍照
@@ -351,6 +409,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 4.4以后
+     *
      * @param data
      */
     @SuppressLint("NewApi")
@@ -381,6 +440,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 4.4版本以前，直接获取真实路径
+     *
      * @param data
      */
     private void handleImageBeforeKitKat(Intent data) {
