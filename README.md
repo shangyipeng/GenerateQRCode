@@ -5,7 +5,7 @@
 
 一般二维码
 <div>
-<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/一般二维码.jpg" width="35%" height="35%">
+<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/一般二维码.jpg" width="30%" height="35%">
   <br><br>
 彩色二维码<br>
 <img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/绿色二维码.jpg" width="30%" height="35%">
@@ -42,12 +42,10 @@
 
 
 ### 二维码保存和分享
-<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/choose_save.jpg" width="30%" height="35%">
-<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/save.jpg" width="30%" height="35%">
+<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/choose_save.jpg" width="30%" height="35%"><img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/save.jpg" width="30%" height="35%">
 
 <br>
-<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/share_list.jpg" width="30%" height="35%">
-<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/share.jpg" width="30%" height="35%">
+<img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/share_list.jpg" width="30%" height="35%"><img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/share.jpg" width="30%" height="35%">
 
 ***
 更多技术干货，欢迎关注我的公众号：ChaoYoung
