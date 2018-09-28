@@ -40,11 +40,13 @@
 <img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/album.jpg" width="30%" height="35%">
 <img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/result.jpg" width="30%" height="35%">
 
+<br><br>
 
 ### 二维码保存和分享
 <img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/choose_save.jpg" width="30%" height="35%"><img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/save.jpg" width="30%" height="35%">
 
 <br>
+
 <img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/share_list.jpg" width="30%" height="35%"><img src="https://github.com/yangxch/GenerateQRCode/raw/master/screenshot/share.jpg" width="30%" height="35%">
 
 ***
